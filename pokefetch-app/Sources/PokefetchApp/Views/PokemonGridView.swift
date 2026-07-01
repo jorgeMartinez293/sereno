@@ -145,6 +145,7 @@ struct PokemonCell: View {
                 }
             }
             .frame(width: 88, height: 78)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
 
             Text(pokemon.name)
                 .font(.caption2)
@@ -163,6 +164,13 @@ struct StaticGIFThumbnail: NSViewRepresentable {
         let iv = NSImageView()
         iv.animates = false
         iv.imageScaling = .scaleProportionallyUpOrDown
+        iv.imageFrameStyle = .none
+        iv.wantsLayer = true
+        iv.layer?.masksToBounds = true
+        iv.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        iv.setContentHuggingPriority(.defaultLow, for: .vertical)
+        iv.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        iv.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         iv.image = NSImage(contentsOf: url)
         return iv
     }
