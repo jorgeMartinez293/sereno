@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>sereno</title>
+        <item>
+            <title>1.0</title>
+            <pubDate>Sat, 18 Jul 2026 01:33:50 +0200</pubDate>
+            <sparkle:version>2</sparkle:version>
+            <sparkle:shortVersionString>1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/jorgeMartinez293/sereno-releases/releases/latest/download/sereno-1.0.zip" length="2794039" type="application/octet-stream" sparkle:edSignature="SPKJNXR/ClHicHlJPvEJRFjFbn6BXymmy5HotFXgDM7aU0akkedtNQBy6vUe1wPdMppOzwsWmfc3q7xWF9mgBA=="/>
+        </item>
+    </channel>
+</rss>

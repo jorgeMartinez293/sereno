@@ -1,14 +1,17 @@
 #!/bin/zsh
 
 # ============================================
-#  pokefetch — installer
+#  sereno — installer
 # ============================================
 
 set -e
 
 SCRIPT_DIR="${0:A:h}"
-INSTALL_DIR="$HOME/.config/fastfetch"
-POKEMONS_DIR="$INSTALL_DIR/pokemons"
+INSTALL_DIR="$HOME/.config/sereno"
+SPRITES_DIR="$INSTALL_DIR/sprites"
+
+# Old pokefetch install location (pre-rename), migrated below.
+LEGACY_DIR="$HOME/.config/fastfetch"
 
 # ---------- colors ----------
 RED='\033[0;31m'
@@ -25,13 +28,13 @@ info() { echo "${CYAN}→${NC} $1" }
 
 # ---------- banner ----------
 echo ""
-echo "${BOLD}    ⚡ pokefetch installer ⚡${NC}"
-echo "    Show animated Pokémon sprites with fastfetch"
+echo "${BOLD}    ✦ sereno installer ✦${NC}"
+echo "    Animated sprites with your system info, every time you open the terminal"
 echo ""
 
 # ---------- check macOS ----------
 if [[ "$(uname)" != "Darwin" ]]; then
-    err "pokefetch currently only supports macOS."
+    err "sereno currently only supports macOS."
     exit 1
 fi
 
@@ -74,42 +77,62 @@ ok "Pillow"
 
 echo ""
 
+# ---------- migrate old pokefetch install ----------
+if [[ ! -d "$INSTALL_DIR" && -f "$LEGACY_DIR/display_gif.sh" ]]; then
+    info "Old pokefetch install detected — migrating"
+    mkdir -p "$INSTALL_DIR"
+    # Sprites and per-user state move; the old scripts are replaced by the new
+    # ones below, and the old copies removed so nothing runs from the legacy dir.
+    [[ -d "$LEGACY_DIR/pokemons" ]] && mv "$LEGACY_DIR/pokemons" "$SPRITES_DIR"
+    [[ -f "$LEGACY_DIR/pokefetch_config.json" ]] && mv "$LEGACY_DIR/pokefetch_config.json" "$INSTALL_DIR/config.json"
+    [[ -f "$LEGACY_DIR/config.jsonc" ]] && mv "$LEGACY_DIR/config.jsonc" "$INSTALL_DIR/fastfetch.jsonc"
+    rm -f "$LEGACY_DIR/display_gif.sh" "$LEGACY_DIR/get_pokemon.sh" "$LEGACY_DIR/get_color.py"
+    # Old zshrc block points at the legacy dir; drop it so the new one replaces it.
+    if [[ -f "$HOME/.zshrc" ]] && grep -q "^# pokefetch$" "$HOME/.zshrc"; then
+        sed -i '' '/^# pokefetch$/,+2d' "$HOME/.zshrc"
+    fi
+    ok "Migrated sprites and settings from pokefetch"
+fi
+
 # ---------- copy files ----------
-info "Installing pokefetch to ${BOLD}$INSTALL_DIR${NC}"
+info "Installing sereno to ${BOLD}$INSTALL_DIR${NC}"
 
 mkdir -p "$INSTALL_DIR"
-mkdir -p "$POKEMONS_DIR"
+mkdir -p "$SPRITES_DIR"
 
-cp "$SCRIPT_DIR/config.jsonc"    "$INSTALL_DIR/config.jsonc"
-cp "$SCRIPT_DIR/display_gif.sh"  "$INSTALL_DIR/display_gif.sh"
-cp "$SCRIPT_DIR/get_pokemon.sh"  "$INSTALL_DIR/get_pokemon.sh"
-cp "$SCRIPT_DIR/get_color.py"    "$INSTALL_DIR/get_color.py"
+# Don't overwrite a migrated/customized fastfetch.jsonc.
+if [[ ! -f "$INSTALL_DIR/fastfetch.jsonc" ]]; then
+    cp "$SCRIPT_DIR/fastfetch.jsonc" "$INSTALL_DIR/fastfetch.jsonc"
+fi
+cp "$SCRIPT_DIR/greet.sh"       "$INSTALL_DIR/greet.sh"
+cp "$SCRIPT_DIR/pick_random.sh" "$INSTALL_DIR/pick_random.sh"
+cp "$SCRIPT_DIR/get_color.py"   "$INSTALL_DIR/get_color.py"
 
-chmod +x "$INSTALL_DIR/display_gif.sh"
-chmod +x "$INSTALL_DIR/get_pokemon.sh"
+chmod +x "$INSTALL_DIR/greet.sh"
+chmod +x "$INSTALL_DIR/pick_random.sh"
 
 ok "Scripts installed"
 
-# ---------- copy GIFs ----------
-GIF_COUNT=$(ls "$SCRIPT_DIR/pokemons/"*.gif 2>/dev/null | wc -l | tr -d ' ')
-if [[ "$GIF_COUNT" -gt 0 ]]; then
-    cp "$SCRIPT_DIR/pokemons/"*.gif "$POKEMONS_DIR/"
-    ok "Copied $GIF_COUNT Pokémon GIFs"
+# ---------- copy sprites ----------
+SPRITE_COUNT=$(ls "$SCRIPT_DIR/sprites/"*.(gif|png)(.N) 2>/dev/null | wc -l | tr -d ' ')
+if [[ "$SPRITE_COUNT" -gt 0 ]]; then
+    cp "$SCRIPT_DIR/sprites/"*.(gif|png)(.N) "$SPRITES_DIR/"
+    ok "Copied $SPRITE_COUNT sprites"
 else
-    warn "No GIFs found in pokemons/ — add .gif files to $POKEMONS_DIR manually"
+    warn "No sprites found in sprites/ — add .gif/.png files to $SPRITES_DIR manually"
 fi
 
 # ---------- shell integration ----------
 ZSHRC="$HOME/.zshrc"
-MARKER="# pokefetch"
+MARKER="# sereno"
 
 if ! grep -q "$MARKER" "$ZSHRC" 2>/dev/null; then
-    info "Adding pokefetch to ${BOLD}~/.zshrc${NC}"
+    info "Adding sereno to ${BOLD}~/.zshrc${NC}"
     cat >> "$ZSHRC" << 'EOF'
 
-# pokefetch
-alias c='clear && $HOME/.config/fastfetch/display_gif.sh'
-$HOME/.config/fastfetch/display_gif.sh
+# sereno
+alias c='clear && $HOME/.config/sereno/greet.sh'
+$HOME/.config/sereno/greet.sh
 EOF
     ok "Shell integration added"
 else
@@ -118,7 +141,7 @@ fi
 
 # ---------- done ----------
 echo ""
-echo "${GREEN}${BOLD}    ✓ pokefetch installed successfully!${NC}"
+echo "${GREEN}${BOLD}    ✓ sereno installed successfully!${NC}"
 echo ""
 echo "    Open a new terminal to see it in action,"
 echo "    or run: ${BOLD}source ~/.zshrc${NC}"

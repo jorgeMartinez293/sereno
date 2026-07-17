@@ -17,7 +17,11 @@ def get_pastel_color(image_path):
     colors = []
     DARK_THRESHOLD = 40 
     
-    for r, g, b, a in img.getdata():
+    try:
+        pixel_data = img.get_flattened_data()
+    except AttributeError:
+        pixel_data = img.getdata()
+    for r, g, b, a in pixel_data:
         # Ignore transparent and dark pixels
         if a < 128:
             continue

@@ -1,10 +1,10 @@
 #!/bin/zsh
 
 # ============================================
-#  pokefetch — uninstaller
+#  sereno — uninstaller
 # ============================================
 
-INSTALL_DIR="$HOME/.config/fastfetch"
+INSTALL_DIR="$HOME/.config/sereno"
 ZSHRC="$HOME/.zshrc"
 
 RED='\033[0;31m'
@@ -19,11 +19,11 @@ warn() { echo "${YELLOW}⚠${NC} $1" }
 info() { echo "${CYAN}→${NC} $1" }
 
 echo ""
-echo "${BOLD}    ⚡ pokefetch uninstaller ⚡${NC}"
+echo "${BOLD}    ✦ sereno uninstaller ✦${NC}"
 echo ""
 
 # ---------- confirmation ----------
-echo -n "This will remove pokefetch from your system. Continue? [y/N] "
+echo -n "This will remove sereno from your system. Continue? [y/N] "
 read -r REPLY
 if [[ ! "$REPLY" =~ ^[Yy]$ ]]; then
     echo "Aborted."
@@ -35,35 +35,34 @@ echo ""
 # ---------- remove installed files ----------
 if [[ -d "$INSTALL_DIR" ]]; then
     info "Removing $INSTALL_DIR..."
-    rm -f "$INSTALL_DIR/display_gif.sh"
-    rm -f "$INSTALL_DIR/get_pokemon.sh"
-    rm -f "$INSTALL_DIR/get_color.py"
-    rm -f "$INSTALL_DIR/config.jsonc"
-    rm -rf "$INSTALL_DIR/pokemons"
-    
-    # Remove the directory only if it's empty
-    rmdir "$INSTALL_DIR" 2>/dev/null && ok "Removed $INSTALL_DIR" || \
-        warn "$INSTALL_DIR not empty — other fastfetch configs may exist, leaving it"
+    rm -rf "$INSTALL_DIR"
+    ok "Removed $INSTALL_DIR"
 else
     warn "$INSTALL_DIR not found — skipping"
 fi
 
 # ---------- remove shell integration ----------
 if [[ -f "$ZSHRC" ]]; then
-    if grep -q "# pokefetch" "$ZSHRC"; then
-        info "Cleaning up ~/.zshrc..."
-        # Remove the pokefetch block (marker + next 2 lines)
-        sed -i '' '/^# pokefetch$/,+2d' "$ZSHRC"
+    CLEANED=0
+    for marker in "# sereno" "# pokefetch"; do
+        if grep -q "^$marker$" "$ZSHRC"; then
+            info "Cleaning up ~/.zshrc ($marker)..."
+            # Remove the block (marker + next 2 lines)
+            sed -i '' "/^$marker\$/,+2d" "$ZSHRC"
+            CLEANED=1
+        fi
+    done
+    if [[ "$CLEANED" == "1" ]]; then
         # Remove any trailing blank line left behind
         sed -i '' -e :a -e '/^\n*$/{$d;N;ba' -e '}' "$ZSHRC"
         ok "Shell integration removed"
     else
-        ok "No pokefetch entries in ~/.zshrc"
+        ok "No sereno entries in ~/.zshrc"
     fi
 fi
 
 echo ""
-echo "${GREEN}${BOLD}    ✓ pokefetch uninstalled${NC}"
+echo "${GREEN}${BOLD}    ✓ sereno uninstalled${NC}"
 echo ""
 echo "    Dependencies (fastfetch, ImageMagick, Pillow) were NOT removed."
 echo "    Remove them manually with: ${BOLD}brew uninstall fastfetch imagemagick${NC}"
