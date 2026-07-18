@@ -78,14 +78,37 @@ ok "Pillow"
 echo ""
 
 # ---------- migrate old pokefetch install ----------
-if [[ ! -d "$INSTALL_DIR" && -f "$LEGACY_DIR/display_gif.sh" ]]; then
+# Gated on the LEGACY files existing, not on $INSTALL_DIR being absent: the sereno
+# app itself can create ~/.config/sereno before this script ever runs (saving a
+# sprite pick calls createDirectory as a side effect), which made the old
+# directory-existence guard skip migration entirely on a real machine. Every step
+# below is independently idempotent, so re-running this block is always safe.
+if [[ -f "$LEGACY_DIR/display_gif.sh" || -f "$LEGACY_DIR/pokefetch_config.json" || -d "$LEGACY_DIR/pokemons" ]]; then
     info "Old pokefetch install detected — migrating"
-    mkdir -p "$INSTALL_DIR"
-    # Sprites and per-user state move; the old scripts are replaced by the new
-    # ones below, and the old copies removed so nothing runs from the legacy dir.
-    [[ -d "$LEGACY_DIR/pokemons" ]] && mv "$LEGACY_DIR/pokemons" "$SPRITES_DIR"
-    [[ -f "$LEGACY_DIR/pokefetch_config.json" ]] && mv "$LEGACY_DIR/pokefetch_config.json" "$INSTALL_DIR/config.json"
-    [[ -f "$LEGACY_DIR/config.jsonc" ]] && mv "$LEGACY_DIR/config.jsonc" "$INSTALL_DIR/fastfetch.jsonc"
+    mkdir -p "$SPRITES_DIR"
+    if [[ -d "$LEGACY_DIR/pokemons" ]]; then
+        # Merge, don't clobber: $SPRITES_DIR may already hold the CC0 default pack
+        # (or a prior partial migration) — only move sprites not already present.
+        while IFS= read -r -d '' f; do
+            dest="$SPRITES_DIR/$(basename "$f")"
+            [[ -f "$dest" ]] || mv "$f" "$dest"
+        done < <(find "$LEGACY_DIR/pokemons" -maxdepth 1 -type f \( -iname '*.gif' -o -iname '*.png' \) -print0 2>/dev/null)
+        rmdir "$LEGACY_DIR/pokemons" 2>/dev/null || rm -rf "$LEGACY_DIR/pokemons"
+    fi
+    if [[ -f "$LEGACY_DIR/pokefetch_config.json" ]]; then
+        # Only adopt the legacy selection if sereno doesn't already have a NEWER
+        # config — e.g. a pick made in the app before this script ran.
+        if [[ ! -f "$INSTALL_DIR/config.json" || "$LEGACY_DIR/pokefetch_config.json" -nt "$INSTALL_DIR/config.json" ]]; then
+            mkdir -p "$INSTALL_DIR"
+            mv "$LEGACY_DIR/pokefetch_config.json" "$INSTALL_DIR/config.json"
+        else
+            rm -f "$LEGACY_DIR/pokefetch_config.json"
+        fi
+    fi
+    if [[ -f "$LEGACY_DIR/config.jsonc" && ! -f "$INSTALL_DIR/fastfetch.jsonc" ]]; then
+        mkdir -p "$INSTALL_DIR"
+        mv "$LEGACY_DIR/config.jsonc" "$INSTALL_DIR/fastfetch.jsonc"
+    fi
     rm -f "$LEGACY_DIR/display_gif.sh" "$LEGACY_DIR/get_pokemon.sh" "$LEGACY_DIR/get_color.py"
     # Old zshrc block points at the legacy dir; drop it so the new one replaces it.
     if [[ -f "$HOME/.zshrc" ]] && grep -q "^# pokefetch$" "$HOME/.zshrc"; then
