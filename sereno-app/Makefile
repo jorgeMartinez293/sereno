@@ -53,12 +53,12 @@ app: build
 		iconutil -c icns AppIcon.iconset -o $(RESOURCES_DIR)/AppIcon.icns; \
 		rm -R AppIcon.iconset; \
 	fi
-	# Bundle the terminal installer (scripts + sprites) so the .app is self-contained:
-	# the app offers to run it on first launch (see AppDelegate.launchInstaller).
+	# Bundle the terminal installer (scripts) so the .app is self-contained: the app
+	# offers to run it on first launch (see AppDelegate.launchInstaller). Sprites no
+	# longer ship with the repo — they come from sprite-packs/ via the app.
 	@mkdir -p $(RESOURCES_DIR)/installer
 	@cp ../install.sh ../uninstall.sh ../greet.sh ../pick_random.sh ../get_color.py ../fastfetch.jsonc $(RESOURCES_DIR)/installer/
 	@chmod +x $(RESOURCES_DIR)/installer/install.sh $(RESOURCES_DIR)/installer/uninstall.sh $(RESOURCES_DIR)/installer/greet.sh
-	@cp -R ../sprites $(RESOURCES_DIR)/installer/sprites
 	# Embed Sparkle.framework (auto-update): swift build links against it but doesn't
 	# copy it into the bundle, and Sparkle can't run from outside the app.
 	@SPARKLE_FW=$$(find .build -maxdepth 8 -name 'Sparkle.framework' -type d | head -1); \

@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "packs": [
+    {
+      "id": "apple",
+      "name": "Apple",
+      "description": "Manzanas y Macs clásicos",
+      "sprites": [
+        "imac.gif",
+        "mac-clasico.gif",
+        "manzana-azul.gif",
+        "manzana-brillante.gif",
+        "manzana-dorada.gif",
+        "manzana-kawaii.gif",
+        "manzana-pixel.gif",
+        "manzana-roja.gif",
+        "manzana-verde.gif"
+      ]
+    },
+    {
+      "id": "espacio",
+      "name": "Espacio",
+      "description": "Cohetes, planetas y ovnis",
+      "sprites": [
+        "cohete-azul.gif",
+        "cohete-mini.gif",
+        "cohete-retro.gif",
+        "cohete-turbo.gif",
+        "cohete.gif",
+        "luna.gif",
+        "ovni-luces.gif",
+        "ovni-plateado.gif",
+        "planeta-anillos.gif",
+        "saturno-dorado.gif",
+        "saturno.gif",
+        "tierra-pixel.gif",
+        "tierra.gif",
+        "transbordador.gif"
+      ]
+    },
+    {
+      "id": "naturaleza",
+      "name": "Naturaleza",
+      "description": "Mariposas, flores, setas y árboles",
+      "sprites": [
+        "arbol-pixel.gif",
+        "casa-seta.gif",
+        "flor-rosa.gif",
+        "flor-sakura.gif",
+        "flor-sonriente.gif",
+        "girasol-pixel.gif",
+        "girasol-sonriente.gif",
+        "manzano.gif",
+        "margarita-lila.gif",
+        "margarita-roja.gif",
+        "mariposa-amarilla.gif",
+        "mariposa-azul.gif",
+        "mariposa-monarca.gif",
+        "mariposa-naranja.gif",
+        "mariposa-pixel.gif",
+        "mariposa-rosa.gif",
+        "seta-pixel.gif",
+        "setas-rojas.gif"
+      ]
+    },
+    {
+      "id": "animales",
+      "name": "Animales",
+      "description": "Gatos, peces, ranas y pingüinos",
+      "sprites": [
+        "gato-blanco.gif",
+        "gato-comiendo.gif",
+        "gato-corriendo.gif",
+        "gato-durmiendo.gif",
+        "gato-pixel.gif",
+        "koi.gif",
+        "pez-dorado.gif",
+        "pez-naranja.gif",
+        "pinguino-bebe.gif",
+        "pinguino-deslizante.gif",
+        "pinguino-pixel.gif",
+        "rana-arboricola.gif",
+        "rana-pixel.gif",
+        "rana-verde.gif"
+      ]
+    },
+    {
+      "id": "retro",
+      "name": "Retro",
+      "description": "Ordenadores, disquetes y robots",
+      "sprites": [
+        "disquete-azul.gif",
+        "disquete-bailarin.gif",
+        "disquete-descarga.gif",
+        "disquete-morado.gif",
+        "disquete-rojo.gif",
+        "joystick-competicion.gif",
+        "joystick-negro.gif",
+        "joystick-pixel.gif",
+        "pc-azul.gif",
+        "pc-beige.gif",
+        "pc-escribiendo.gif",
+        "pc-raton.gif",
+        "pc-rojo.gif",
+        "portatil-pixel.gif",
+        "robot-3d.gif",
+        "robot-gris.gif",
+        "robot-negro.gif",
+        "robot-pixel.gif",
+        "robot-retro.gif"
+      ]
+    }
+  ]
+}

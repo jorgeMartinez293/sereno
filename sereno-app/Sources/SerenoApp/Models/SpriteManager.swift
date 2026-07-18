@@ -50,4 +50,28 @@ class SpriteManager: ObservableObject {
             }
             .sorted { $0.name < $1.name }
     }
+
+    /// Copies image files into the sprites directory (renaming on collision)
+    /// and reloads. Returns how many files were imported.
+    @discardableResult
+    func importSprites(from urls: [URL]) -> Int {
+        let fm = FileManager.default
+        try? fm.createDirectory(at: Self.spritesDir, withIntermediateDirectories: true)
+
+        let valid = Set(["gif", "png", "jpg", "jpeg", "webp"])
+        var copied = 0
+        for src in urls where valid.contains(src.pathExtension.lowercased()) {
+            let base = src.deletingPathExtension().lastPathComponent
+            let ext  = src.pathExtension
+            var dest = Self.spritesDir.appendingPathComponent(src.lastPathComponent)
+            var i = 2
+            while fm.fileExists(atPath: dest.path) {
+                dest = Self.spritesDir.appendingPathComponent("\(base)-\(i).\(ext)")
+                i += 1
+            }
+            if (try? fm.copyItem(at: src, to: dest)) != nil { copied += 1 }
+        }
+        if copied > 0 { reload() }
+        return copied
+    }
 }

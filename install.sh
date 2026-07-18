@@ -136,13 +136,16 @@ chmod +x "$INSTALL_DIR/pick_random.sh"
 
 ok "Scripts installed"
 
-# ---------- copy sprites ----------
-SPRITE_COUNT=$(ls "$SCRIPT_DIR/sprites/"*.(gif|png)(.N) 2>/dev/null | wc -l | tr -d ' ')
-if [[ "$SPRITE_COUNT" -gt 0 ]]; then
-    cp "$SCRIPT_DIR/sprites/"*.(gif|png)(.N) "$SPRITES_DIR/"
-    ok "Copied $SPRITE_COUNT sprites"
+# ---------- sprites ----------
+# The repo no longer bundles a default sprite pack: themed packs live in
+# sprite-packs/ and are downloaded from the app (botón "+"), or you can drop
+# your own .gif/.png into $SPRITES_DIR (or drag them onto the app).
+EXISTING=$(ls "$SPRITES_DIR/"*.(gif|png)(.N) 2>/dev/null | wc -l | tr -d ' ')
+if [[ "$EXISTING" -gt 0 ]]; then
+    ok "$EXISTING sprites already in $SPRITES_DIR"
 else
-    warn "No sprites found in sprites/ — add .gif/.png files to $SPRITES_DIR manually"
+    warn "No sprites yet — download themed packs from the sereno app (+ button)"
+    warn "or drop .gif/.png files into $SPRITES_DIR"
 fi
 
 # ---------- shell integration ----------

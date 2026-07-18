@@ -5,7 +5,7 @@ let package = Package(
     name: "SerenoApp",
     platforms: [.macOS(.v13)],
     dependencies: [
-        .package(path: "../../LiquidTerminal/Vendor/SwiftTerm"),
+        .package(path: "../../vidrio/Vendor/SwiftTerm"),
         // Sparkle: in-app auto-updates. The Makefile embeds Sparkle.framework
         // into the .app bundle (swift build alone doesn't).
         .package(url: "https://github.com/sparkle-project/Sparkle", from: "2.6.0"),

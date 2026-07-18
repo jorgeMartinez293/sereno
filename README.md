@@ -18,6 +18,8 @@ Como el sereno de antes: te saluda al llegar.
 - 🔋 **Consciente de la batería** — muestra un frame estático con batería para ahorrar
 - 🖼️ **Pixel-perfect** — reescalado nearest-neighbor, pixel art nítido
 - 🖥️ **App de gestión** (`sereno-app/`) — elige sprite fijo o aleatorio, previsualiza en vivo
+- 📦 **Packs temáticos** — descarga sets de GIFs (Apple, espacio, naturaleza...) desde la app
+- 🖐️ **Arrastrar y soltar** — suelta cualquier `.gif` / `.png` sobre la app para añadirlo
 
 ## Instalar
 
@@ -31,11 +33,18 @@ instalador migra automáticamente tus sprites y ajustes.
 
 ## Sprites
 
-El pack incluido son 180 criaturas de
-["Tiny Creatures" de Clint Bellanger](https://opengameart.org/content/tiny-creatures)
-(CC0). Puedes añadir cualquier `.gif` / `.png` propio a `~/.config/sereno/sprites/` —
-los GIFs se animan en terminales compatibles (kitty graphics / iTerm inline images,
-incluido [vidrio](../LiquidTerminal)).
+Los sprites viven en `~/.config/sereno/sprites/`. Hay tres formas de añadirlos:
+
+1. **Packs temáticos** — pulsa el botón **+** en la app y descarga los sets de
+   [`sprite-packs/`](sprite-packs/): *Apple*, *Espacio*, *Naturaleza*, *Animales*
+   y *Retro*. Todos los GIFs tienen fondo transparente (ver
+   [`sprite-packs/ATTRIBUTION.md`](sprite-packs/ATTRIBUTION.md)).
+2. **Arrastrar y soltar** — suelta cualquier `.gif` / `.png` sobre la lista de
+   sprites de la app.
+3. **A mano** — copia los ficheros directamente a `~/.config/sereno/sprites/`.
+
+Los GIFs se animan en terminales compatibles (kitty graphics / iTerm inline
+images, incluido [vidrio](../vidrio)).
 
 ## App de gestión
 

@@ -1,12 +1,18 @@
 import SwiftUI
 import AppKit
+import UniformTypeIdentifiers
 
 struct SpriteGridView: View {
-    let sprites: [Sprite]
+    @ObservedObject var spriteManager: SpriteManager
     @Binding var selectedSprite: Sprite?
     @Binding var isRandomMode: Bool
     @Binding var searchText: String
     let accentColor: Color
+
+    @State private var showPackStore  = false
+    @State private var isDropTargeted = false
+
+    var sprites: [Sprite] { spriteManager.sprites }
 
     var filtered: [Sprite] {
         searchText.isEmpty ? sprites
@@ -26,6 +32,13 @@ struct SpriteGridView: View {
                         Image(systemName: "xmark.circle.fill").foregroundColor(.secondary)
                     }.buttonStyle(.plain)
                 }
+                Button { showPackStore = true } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.system(size: 16))
+                        .foregroundColor(accentColor)
+                }
+                .buttonStyle(.plain)
+                .help("Descargar packs de sprites")
             }
             .padding(10)
             .background(.ultraThinMaterial)
@@ -76,9 +89,67 @@ struct SpriteGridView: View {
             HStack {
                 Text("\(filtered.count) sprites").font(.caption).foregroundColor(.secondary)
                 Spacer()
+                Text("Arrastra .gif aquí").font(.caption2).foregroundColor(Color.secondary.opacity(0.7))
             }
             .padding(.horizontal, 10).padding(.vertical, 6)
         }
+        .onDrop(of: [.fileURL], isTargeted: $isDropTargeted) { providers in
+            handleDrop(providers)
+        }
+        .overlay {
+            if isDropTargeted {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(accentColor.opacity(0.12))
+                    RoundedRectangle(cornerRadius: 12)
+                        .strokeBorder(accentColor, style: StrokeStyle(lineWidth: 2, dash: [7]))
+                    VStack(spacing: 8) {
+                        Image(systemName: "arrow.down.doc.fill")
+                            .font(.system(size: 30)).foregroundColor(accentColor)
+                        Text("Suelta para añadir sprites")
+                            .font(.callout).fontWeight(.medium)
+                    }
+                    .padding(14)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(.thickMaterial))
+                }
+                .padding(6)
+                .allowsHitTesting(false)
+            }
+        }
+        .animation(.easeInOut(duration: 0.15), value: isDropTargeted)
+        .sheet(isPresented: $showPackStore) {
+            PackStoreView(spriteManager: spriteManager, accentColor: accentColor)
+        }
+    }
+
+    private func handleDrop(_ providers: [NSItemProvider]) -> Bool {
+        let urlProviders = providers.filter { $0.hasItemConformingToTypeIdentifier(UTType.fileURL.identifier) }
+        guard !urlProviders.isEmpty else { return false }
+
+        let group = DispatchGroup()
+        var urls: [URL] = []
+        let lock = NSLock()
+
+        for provider in urlProviders {
+            group.enter()
+            provider.loadItem(forTypeIdentifier: UTType.fileURL.identifier) { item, _ in
+                defer { group.leave() }
+                var url: URL?
+                if let data = item as? Data {
+                    url = URL(dataRepresentation: data, relativeTo: nil)
+                } else if let u = item as? URL {
+                    url = u
+                }
+                if let url {
+                    lock.lock(); urls.append(url); lock.unlock()
+                }
+            }
+        }
+
+        group.notify(queue: .main) {
+            spriteManager.importSprites(from: urls)
+        }
+        return true
     }
 }
 

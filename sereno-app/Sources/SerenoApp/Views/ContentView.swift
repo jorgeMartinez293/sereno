@@ -15,7 +15,7 @@ struct ContentView: View {
     var body: some View {
         HSplitView {
             SpriteGridView(
-                sprites: spriteManager.sprites,
+                spriteManager: spriteManager,
                 selectedSprite: $selectedSprite,
                 isRandomMode: $isRandomMode,
                 searchText: $searchText,
