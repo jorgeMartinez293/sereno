@@ -1,5 +1,7 @@
 # Atribución de sprites
 
+## GifCities (pixel art)
+
 GIFs recuperados del archivo de GeoCities vía [GifCities](https://gifcities.org) (Internet Archive).
 Obras de aficionados de la era GeoCities (1994-2009); autores originales desconocidos.
 
@@ -77,3 +79,69 @@ Obras de aficionados de la era GeoCities (1994-2009); autores originales descono
 - `retro/robot-negro.gif` — https://blob.gifcities.org/gifcities/475GGOHIOS3DECX5KUK2BFKFFNFKPWSI.gif
 - `retro/robot-pixel.gif` — https://blob.gifcities.org/gifcities/EO7BZB2LME4MA6XECOZRYDHEYLQN7JHC.gif
 - `retro/robot-retro.gif` — https://blob.gifcities.org/gifcities/4ML44CWUOKQMJXLDMSI3EJDQGCVOTFKP.gif
+
+## Noto Animated Emoji (HD, fondo transparente)
+
+GIFs de alta calidad del proyecto [Noto Animated Emoji](https://googlefonts.github.io/noto-emoji-animation/) de Google,
+licenciados bajo [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Redimensionados a 200px.
+
+- `animales/ballena.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f433/512.gif
+- `animales/buho.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f989/512.gif
+- `animales/flamenco.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f9a9/512.gif
+- `animales/gato-hd.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f431/512.gif
+- `animales/panda.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f43c/512.gif
+- `animales/pez-hd.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f41f/512.gif
+- `animales/pinguino-hd.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f427/512.gif
+- `animales/pollito.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f425/512.gif
+- `animales/pulpo.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f419/512.gif
+- `animales/rana-hd.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f438/512.gif
+- `animales/tortuga.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f422/512.gif
+- `animales/zorro.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f98a/512.gif
+- `apple/manzana-hd.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f34e/512.gif
+- `caritas/alucinado.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f929/512.gif
+- `caritas/carinoso.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f970/512.gif
+- `caritas/confeti.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f389/512.gif
+- `caritas/corazon-brillante.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f496/512.gif
+- `caritas/corazon.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/2764_fe0f/512.gif
+- `caritas/enamorado.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f60d/512.gif
+- `caritas/fiestero.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f973/512.gif
+- `caritas/fuego.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f525/512.gif
+- `caritas/sonrisa.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f600/512.gif
+- `comida/cerezas.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f352/512.gif
+- `comida/donut.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f369/512.gif
+- `comida/fresa.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f353/512.gif
+- `comida/galleta.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f36a/512.gif
+- `comida/hamburguesa.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f354/512.gif
+- `comida/helado.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f366/512.gif
+- `comida/kiwi.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f95d/512.gif
+- `comida/naranja.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f34a/512.gif
+- `comida/palomitas.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f37f/512.gif
+- `comida/pizza.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f355/512.gif
+- `comida/sandia.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f349/512.gif
+- `comida/taco.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f32e/512.gif
+- `comida/tarta.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f382/512.gif
+- `espacio/alienigena.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f47d/512.gif
+- `espacio/cohete-hd.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f680/512.gif
+- `espacio/cometa.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/2604_fe0f/512.gif
+- `espacio/estrella-brillante.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f31f/512.gif
+- `espacio/luna-hd.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f31b/512.gif
+- `espacio/ovni-hd.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f6f8/512.gif
+- `espacio/planeta-anillos-hd.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1fa90/512.gif
+- `espacio/sol-sonriente.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f31e/512.gif
+- `espacio/tierra-hd.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f30d/512.gif
+- `espacio/via-lactea.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f30c/512.gif
+- `naturaleza/abeja.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f41d/512.gif
+- `naturaleza/arcoiris.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f308/512.gif
+- `naturaleza/brote.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f331/512.gif
+- `naturaleza/cactus.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f335/512.gif
+- `naturaleza/caracol.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f40c/512.gif
+- `naturaleza/flor-sakura-hd.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f338/512.gif
+- `naturaleza/mariposa-hd.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f98b/512.gif
+- `naturaleza/rosa.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f339/512.gif
+- `naturaleza/seta-hd.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f344/512.gif
+- `naturaleza/tulipan.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f337/512.gif
+- `retro/camara-retro.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f4f7/512.gif
+- `retro/fantasma.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f47b/512.gif
+- `retro/invasor-espacial.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f47e/512.gif
+- `retro/portatil-hd.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f4bb/512.gif
+- `retro/robot-hd.gif` — https://fonts.gstatic.com/s/e/notoemoji/latest/1f916/512.gif

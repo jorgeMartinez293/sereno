@@ -36,8 +36,9 @@ instalador migra automáticamente tus sprites y ajustes.
 Los sprites viven en `~/.config/sereno/sprites/`. Hay tres formas de añadirlos:
 
 1. **Packs temáticos** — pulsa el botón **+** en la app y descarga los sets de
-   [`sprite-packs/`](sprite-packs/): *Apple*, *Espacio*, *Naturaleza*, *Animales*
-   y *Retro*. Todos los GIFs tienen fondo transparente (ver
+   [`sprite-packs/`](sprite-packs/): *Apple*, *Espacio*, *Naturaleza*, *Animales*,
+   *Retro*, *Caritas* y *Comida*. Cada pack mezcla pixel art clásico y emojis
+   animados en HD; todos los GIFs tienen fondo transparente (ver
    [`sprite-packs/ATTRIBUTION.md`](sprite-packs/ATTRIBUTION.md)).
 2. **Arrastrar y soltar** — suelta cualquier `.gif` / `.png` sobre la lista de
    sprites de la app.
