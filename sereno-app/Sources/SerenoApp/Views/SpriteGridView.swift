@@ -9,7 +9,6 @@ struct SpriteGridView: View {
     @Binding var searchText: String
     let accentColor: Color
 
-    @State private var showPackStore  = false
     @State private var isDropTargeted = false
 
     var sprites: [Sprite] { spriteManager.sprites }
@@ -23,28 +22,6 @@ struct SpriteGridView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Search
-            HStack {
-                Image(systemName: "magnifyingglass").foregroundColor(.secondary)
-                TextField("Buscar sprite...", text: $searchText).textFieldStyle(.plain)
-                if !searchText.isEmpty {
-                    Button { searchText = "" } label: {
-                        Image(systemName: "xmark.circle.fill").foregroundColor(.secondary)
-                    }.buttonStyle(.plain)
-                }
-                Button { showPackStore = true } label: {
-                    Image(systemName: "plus.circle.fill")
-                        .font(.system(size: 16))
-                        .foregroundColor(accentColor)
-                }
-                .buttonStyle(.plain)
-                .help("Descargar packs de sprites")
-            }
-            .padding(10)
-            .background(.ultraThinMaterial)
-
-            Divider()
-
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 8) {
                     // Aleatorio card — always first
@@ -84,6 +61,9 @@ struct SpriteGridView: View {
                     .padding(.top, 40)
                 }
             }
+            // Let the translucent sidebar material show through uniformly — without this the
+            // scroll view paints its own slightly-different gray under the search field.
+            .scrollContentBackground(.hidden)
 
             Divider()
             HStack {
@@ -117,9 +97,6 @@ struct SpriteGridView: View {
             }
         }
         .animation(.easeInOut(duration: 0.15), value: isDropTargeted)
-        .sheet(isPresented: $showPackStore) {
-            PackStoreView(spriteManager: spriteManager, accentColor: accentColor)
-        }
     }
 
     private func handleDrop(_ providers: [NSItemProvider]) -> Bool {
